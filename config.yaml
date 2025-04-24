@@ -1,9 +1,10 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
-name: Example add-on
+name: TSY KNX IPRouter
 version: "latest"
-slug: example
-description: Example add-on
-url: "https://github.com/home-assistant/addons-example/tree/main/example"
+slug: tsy-knx-iprouter
+boot: auto
+description: Browser the TSY KNX IPRouter From Internet
+url: "https://shop62960083.taobao.com/?spm=a21xtw.29978518.0.0"
 arch:
   - armhf
   - armv7
@@ -14,12 +15,15 @@ init: false
 ingress: true
 ingress_stream: true
 map:
-- addon_config:rw
-- homeassistant_config:rw
-- media:rw
-- share:rw
-- ssl
+  - addons:rw
+  - addon_config:rw
+  - all_addon_configs:rw
+  - backup:rw
+  - homeassistant_config:rw
+  - media:rw
+  - share:rw
+  - ssl
 options:
-  message: "Hello world..."
+  message: "欢迎使用TSY KNX IPRouter"
 schema:
   message: "str?"

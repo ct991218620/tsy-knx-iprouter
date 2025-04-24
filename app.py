@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/cgi-bin/status_static', methods=['GET'])
 def status_static():
-    file_path = '/var/www/iprouter/knxstatic.json'
+    file_path = '/addon_configs/local_tsy-knx-iprouter/knxstatic.json'
     try:
         # 检查文件是否存在
         if os.path.exists(file_path):
@@ -20,7 +20,7 @@ def status_static():
 
 @app.route('/cgi-bin/status_dynamic', methods=['GET'])
 def status_dynamic():
-    file_path = '/var/www/iprouter/knxdynamic.json'
+    file_path = '/addon_configs/local_tsy-knx-iprouter/knxdynamic.json'
     try:
         # 检查文件是否存在
         if os.path.exists(file_path):
