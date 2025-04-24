@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TSY KNX IP 接口</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	  <style>
+  .center{
+		margin: 0 auto;
+		width: 1000px;
+	}
+   .lipadding{
+	    padding-left: 20px;
+   }  
+		  
+ </style>
+
+  </head>
+
+	
+	
+  <body>
+	<nav class="navbar-dark bg-dark" >
+		<div class="center">
+		  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" > <a class="navbar-brand"  href="#">TSY KNX IP 接口</a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent" >
+			  <ul class="navbar-nav mr-auto">
+				<li class="nav-item lipadding" > <a class="nav-link" href="status.html">状态总览</a> </li>
+				<li class="nav-item lipadding" > <a class="nav-link" href="update.html">固件升级</a> </li>
+				<li class="nav-item lipadding" > <a class="nav-link" href="pswcfg.html">密码设置</a> </li>
+	   
+			  </ul>
+			</div>
+			<ul class="navbar-nav mr-auto">
+			<li class="nav-item lipadding"> <a class="nav-link" id="sysrestart" href="#">重启</a> </li>
+			<li class="nav-item lipadding"> <a class="nav-link" id="out" href="index.html">退出</a> </li>
+			</ul>  
+		  </nav>
+		</div>
+	  </nav>
+   <div class="center">
+	<div class="container">
+	    <h2  style="font-weight: 800;padding-top:20px;">状态</h2>
+        <h5  style="font-weight: 1000;padding-top:5px;">系统</h5>
+		<table class="table table-hover" style="font-size: 15px">
+        <tbody>
+         <tr>
+         <td  width="30%">主机名</td>
+         <td>TSY KNX IP 接口</td>
+         </tr>
+         <tr>
+         <td>固件版本</td>
+         <td id="fw"></td>
+         </tr>
+	     <tr>
+         <td >KNX端口</td>
+         <td id="knxstate"></td>
+         </tr>
+		 <tr>
+		 <td>运行时长</td>
+         <td id = "runtim"> </td>
+         </tr>
+        </tbody>
+	    </table>
+		<h5 class="form-signin-heading" style="font-weight: 1000;padding-top:5px;">内存状态</h5>
+		<table class="table table-hover">
+		<tbody>
+		<tr>
+		<td  width="30%">可用数</td>
+        <td width="60%">
+		<div class="progress" >
+        <div id="prog" role="progressbar"  style="color: #000000" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+		</td>
+			 <td><span id="badge" class="badge bg-info"></span></td>
+        </tr>
+        </tbody>
+        </table>
+		
+		<h5 class="form-signin-heading" style="font-weight: 1000;padding-top:5px;">设备参数信息</h5>
+		<table class="table table-hover">
+		<tbody>
+		<tr>
+		<td  width="15%">DHCP功能：</td>
+        <td width="35%" id="dhcp"></td>
+	 <!--   <td width="5%" style="border-left:ridge"></td>-->
+	    <td width="15%" >KNX接口地址1：</td>
+		<td id="addr1"></td>
+        </tr>
+		<tr>
+		<td  width="15%">设备IP：</td>
+        <td width="35%" id="ip"></td>
+<!--	    <td width="5%" style="border-left:ridge"></td>-->
+	    <td width="15%" >KNX接口地址2：</td>
+		<td id="addr2"></td>
+        </tr>
+		<tr>
+		<td  width="15%">网关：</td>
+        <td width="35% " id="gateway"></td>
+<!--	    <td width="5%" style="border-left:ridge"></td>-->
+	    <td width="15%" >KNX接口地址3：</td>
+		<td id="addr3"></td>
+        </tr>
+		<tr>
+		<td  width="15%">子网掩码：</td>
+        <td width="35%" id="netmask"></td>
+<!--	    <td width="5%" style="border-left:ridge"></td>-->
+	    <td width="15%" >KNX接口地址4：</td>
+		<td id="addr4"></td>
+        </tr>
+		<tr>
+		<td  width="15%">MAC地址:</td>
+        <td width="35%" id="mac"></td>
+<!--	    <td width="5%" style="border-left:ridge"></td>-->
+	    <td width="15%" >KNX接口地址5：</td>
+		<td id="addr5"></td>
+        </tr>
+        </tbody>
+        </table>
+		
+		<h5 class="form-signin-heading" style="font-weight: 1000;padding-top:5px;">已连接接口主机</h5>
+		<table class="table table-hover">
+
+		<thead class="thead-light">
+		<tr>
+			<th scope="col">#</th>
+			<th>主机IP</th>
+			<th>主机端口</th>
+			<th>KNX接口地址</th>
+			<th width="25%">连接时间</th>
+		</tr>
+	   </thead>
+		<tbody id="tab">
+        </tbody>
+        </table>    
+    </div> <!-- /container -->	  
+    <div class="container">
+     <hr style="border:none;border-top:1px solid #ADABAB;">
+     <a href="" style="padding: 0px;">Powered by Tesiyun Electronics / Copyright (c) 2020 Tesiyun Electronics All rights reserved</a>     
+	  </div>
+ <div class="modal fade" id="exampleModal5"  data-backdrop="static" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content" >
+          <div class="modal-body" style="text-align:center;margin-top:10;padding-top:10">
+            <h5>重启系统，请确认</h5>
+          </div>
+          <div style="text-align: center">
+            <button type="button" class="btn btn-secondary" style="margin:10px" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" id="restart2" style="margin:10px" >确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+	  </div>
+	
+  </body>
+<script src="js/jquery.bootstrap.cookie.js"></script> 
+<script>
+	var s,d,m,h;
+	const basePath = window.location.pathname.replace(/\/$/, ""); // 去掉末尾的斜杠（如果有）
+	function loaddata(){
+		$("#runtim").empty();
+		$.getJSON(`${basePath}/cgi-bin/status_static`,function(data){
+			// var data = JSON.parse(str);
+			console.log(data);
+			console.log(data.firmware);
+			$("#fw").append(data.firmware);
+			var t = data.runtime;d= t.day;h=t.hour;m= t.min;s = t.second;
+		  	$("#runtim").append(d+"d "+h+"h  "+m+"min  "+s+"s");
+			var ipin = data.ipinfo;
+			if(ipin.dhcp==1){$("#dhcp").append("开启");}else{$("#dhcp").append("关闭");}
+			$("#ip").append(ipin.ip);
+			$("#gateway").append(ipin.gateway);
+			$("#netmask").append(ipin.netmask);	
+			$("#mac").append(ipin.mac);
+			var ka = data.knxaddr;
+			$("#addr1").append(ka.addr1);
+			$("#addr2").append(ka.addr2);
+			$("#addr3").append(ka.addr3);
+			$("#addr4").append(ka.addr4);
+			$("#addr5").append(ka.addr5);
+		   
+		});
+		
+	}
+	loaddata();
+	function setprog(value){
+		$("#prog,#badge").empty();
+		var lvalue = 100-value;
+		$("#badge").append("可用数："+lvalue+"%");
+		$("#prog").css("width",value + "%").text(value + "%");
+	    $("#prog,#badge").removeClass();
+		if (value>=0 && value<=30) {
+			$("#badge").addClass("badge bg-success");
+			$("#prog").addClass("progress-bar bg-success");
+		}
+		else if (value>=30 && value <=60) {
+			$("#badge").addClass("badge bg-info");
+			$("#prog").addClass("progress-bar bg-info");
+		}
+		else if (value>=60 && value <=80) {
+			$("#badge").addClass("badge bg-warning");
+			$("#prog").addClass("progress-bar bg-warning");
+		}
+		else if(value >= 80 && value<100) {
+			$("#badge").addClass("badge bg-danger");
+		   	$("#prog").addClass("progress-bar bg-danger");    
+		}
+	}
+	function settab(data){
+		console.log(data);
+        if(data.length>0)
+		{
+			$("#tab").empty();
+			$.each(data,function(i,n){
+				var dataid = i+1;
+				$("#tab").append('<tr><td>'+(i+1)+'</td><td>'+n.ip+'</td><td>'+n.port+'</td><td>'+n.knxaddr+'</td><td>'+n.linktime.day+'d '+n.linktime.hour+'h '+n.linktime.min+'min '+n.linktime.second+'s </td></tr>');
+			});
+			
+		}else
+		{
+				$("#tab").empty();
+				$("#tab").append('<tr align="center"><td colspan="5" ><em>尚无任何主机连接至接口</em></td></tr>');			   
+		}
+	} 
+	function loaddynamicdata(){
+		$.getJSON(`${basePath}/cgi-bin/status_dynamic`,function(data){
+			$("#runtim").empty();
+			var t = data.runtime;d= t.day;h=t.hour;m= t.min;s = t.second;
+		  	$("#runtim").append(d+"d "+h+"h  "+m+"min  "+s+"s");
+			$("#knxstate").empty();
+			if(data.knxstate==1){
+				$("#knxstate").append("运行正常");
+			}else{
+				$("#knxstate").append("未连接至KNX总线");
+			}
+			
+			setprog(data.memory);
+			settab(data.hostinfo);
+		}
+	)};
+	$('#sysrestart').click(function(){
+		$('#exampleModal5').modal('show');
+	}); 
+	 $('#restart2').click(function(){
+	        window.location.href="restart.html";
+	});  
+   loaddynamicdata();
+	
+   setInterval(loaddynamicdata,1000);	
+	
+</script>	
+	
+</html>

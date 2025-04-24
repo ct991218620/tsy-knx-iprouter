@@ -1,0 +1,42 @@
+{
+  "name": "TSY KNX IPRouter",
+  "version": "1.13",
+  "slug": "TSY KNX IPRouter",
+  "description": "Browser the TSY KNX IPRouter From Internet",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "url": "https://github.com/zhujisheng/hassio-addons/tree/master/tunnel2local",
+  "startup": "services",
+  "boot": "auto",
+  "image": "my-test-addon",
+  "ingress": true,
+  "ingress_stream": true,
+  "map": [
+    "addon_config:rw",
+    "media:rw",
+    "all_addon_configs:rw",
+    "homeassistant_config:rw",
+    "addons:rw",
+    "backup:rw",
+    "share:rw",
+    "ssl:rw"
+  ],
+  "panel_admin": false,
+  "panel_icon": "mdi:file-search",
+  "ports": {
+    "8080/tcp": null
+  },
+  "ports_description": {
+    "8080/tcp": "Web UI port"
+  },
+  "schema": {
+    "frp_server": "str",
+    "frp_server_port": "port",
+    "frp_token": "str",
+    "local_host": "str",
+    "local_port": "port",
+    "tunnel_type": "list(tcp|http)",
+    "http_domain": "str?",
+    "http_subdomain_host": "str?",
+    "tcp_remote_port": "port?"
+  }
+}

@@ -1,0 +1,25 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Example add-on
+version: "latest"
+slug: example
+description: Example add-on
+url: "https://github.com/home-assistant/addons-example/tree/main/example"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
+ingress: true
+ingress_stream: true
+map:
+- addon_config:rw
+- homeassistant_config:rw
+- media:rw
+- share:rw
+- ssl
+options:
+  message: "Hello world..."
+schema:
+  message: "str?"
